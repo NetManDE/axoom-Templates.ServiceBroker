@@ -1,0 +1,25 @@
+# This file contains default configuration.
+#
+# Additional config files:
+#   dev:        appsettings.Development.yml
+#   live:       appsettings.Production.yml
+#   Kubernetes: helmfile.yaml
+#   local dev:  launchSettings.json
+
+Logging:
+  LogLevel:
+    Microsoft: Warning # Reduce ASP.NET Core verbosity
+
+Authentication:
+  Realm: axoom-servicebroker
+
+Broker:
+  Catalog:
+    Services:
+      - Id: myservice
+        Name: myservice
+        Description: A service.
+        Plans:
+          - Id: myplan
+            Name: myplan
+            Description: A plan.

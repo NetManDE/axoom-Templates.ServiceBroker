@@ -1,0 +1,45 @@
+{
+  "author": "Bastian Eicher",
+  "classifications": [ "AXOOM", "Web", "Docker" ],
+  "name": "AXOOM Service Broker (ASP.NET Core, Docker)",
+  "shortName": "axoom-servicebroker",
+  "identity": "Axoom.Templates.ServiceBroker",
+  "groupIdentity": "Axoom.Templates.ServiceBroker",
+  "tags": {
+    "language": "C#"
+  },
+  "sourceName": "MyVendor.ServiceBroker",
+  "preferNameDirectory": true,
+  "guids": [
+    "837BC53E-0271-4E9C-B5B5-C60EA7A7C7B5",
+    "113F2D04-69F0-40C3-8797-BA3F356DD812",
+    "B74301C8-0759-45FE-BA6C-E832BABE08E5"
+  ],
+  "symbols": {
+    "serviceName": {
+      "type": "parameter",
+      "dataType": "string",
+      "isRequired": true,
+      "replaces": "myvendor-servicebroker",
+      "fileRename": "myvendor-servicebroker"
+    },
+    "friendlyName": {
+      "type": "parameter",
+      "dataType": "string",
+      "isRequired": true,
+      "replaces": "My Service Broker"
+    },
+    "vendorDomain": {
+      "type": "parameter",
+      "dataType": "string",
+      "isRequired": true,
+      "replaces": "example.com"
+    },
+    "description": {
+      "type": "parameter",
+      "dataType": "string",
+      "isRequired": true,
+      "replaces": "my description"
+    }
+  }
+}

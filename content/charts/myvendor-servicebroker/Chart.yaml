@@ -1,0 +1,4 @@
+apiVersion: v1
+name: myvendor-servicebroker
+version: 0 # replaced with auto-generated version number by build server
+description: Provisions services requested via the Open Service Broker API

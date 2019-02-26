@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <AssemblyName>MyVendor.ServiceBroker</AssemblyName>
+    <RootNamespace>MyVendor.ServiceBroker</RootNamespace>
+    <UserSecretsId>MyVendor.ServiceBroker</UserSecretsId>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <ServerGarbageCollection>False</ServerGarbageCollection>
+    <OutputType>Exe</OutputType>
+    <IsPackable>False</IsPackable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>example.com</Authors>
+    <Title>My Service Broker</Title>
+    <Description>Provisions services requested via the Open Service Broker API.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Axoom.Extensions.Logging.Console" Version="1.0.0" />
+    <PackageReference Include="Axoom.Extensions.Prometheus.Standalone" Version="2.0.3" />
+    <PackageReference Include="codeessentials.AspNetCore.Diagnostics.Demystifier" Version="1.0.54" />
+    <PackageReference Include="codeessentials.Extensions.Logging.Demystifier" Version="1.0.54" />
+    <PackageReference Include="idunno.Authentication.Basic" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.HttpOverrides" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
+    <PackageReference Include="NetEscapades.Configuration.Yaml" Version="1.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Nexogen.Libraries.Metrics.Extensions" Version="3.0.1" />
+    <PackageReference Include="OpenServiceBroker.Server" Version="0.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2018.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings*.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- Include XML documentation in Publish Output to make it available for Swagger generation. -->
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+    <ItemGroup>
+      <DocFile Include="$(OutputPath)\MyVendor.ServiceBroker.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
+
+  <!-- Include full SemVer version in Publish Output to make it available at runtime. -->
+  <Target Name="GenerateVersionFile" AfterTargets="Build">
+    <WriteLinesToFile File="$(OutputPath)\VERSION" Lines="$(Version)" Overwrite="true" />
+  </Target>
+  <Target Name="PublishVersionFile" AfterTargets="Publish">
+    <Copy SourceFiles="$(OutputPath)\VERSION" DestinationFolder="$(PublishDir)" />
+  </Target>
+
+</Project>
