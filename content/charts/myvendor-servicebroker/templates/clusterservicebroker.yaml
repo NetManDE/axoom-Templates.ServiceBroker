@@ -9,6 +9,9 @@ spec:
       secretRef:
         namespace: {{ .Release.Namespace }}
         name: {{ .Values.app.name }}-auth
+  # Fetch Catalog every 15min and immediately on deployment
+  relistDuration: 15m0s
+  relistRequests: {{ date "20060102150405" .Release.Time }}
 ---
 apiVersion: v1
 kind: Secret
