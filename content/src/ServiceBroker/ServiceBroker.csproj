@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Authors>example.com</Authors>
     <Title>My Service Broker</Title>
     <Description>Provisions services requested via the Open Service Broker API.</Description>
   </PropertyGroup>

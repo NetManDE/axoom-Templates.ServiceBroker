@@ -29,12 +29,6 @@
       "isRequired": true,
       "replaces": "My Service Broker"
     },
-    "vendorDomain": {
-      "type": "parameter",
-      "dataType": "string",
-      "isRequired": true,
-      "replaces": "example.com"
-    },
     "description": {
       "type": "parameter",
       "dataType": "string",
