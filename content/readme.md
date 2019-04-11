@@ -1,7 +1,5 @@
 # My Service Broker
 
-This repository contains the source code for My Service Broker.
-
 my description
 
 ## Development
@@ -22,7 +20,7 @@ You can then interact with the API at: http://localhost:12345/swagger/
 
 The credentials for local test instances are username `test` and password `test`.
 
-To access Prometheus metrics locally without Docker Compose run:
+To allow Prometheus metrics to be exposed when running locally run:
 ```powershell
 netsh http add urlacl http://*:5000/ user=$env:USERDOMAIN\$env:USERNAME
 ```
