@@ -30,8 +30,7 @@ namespace MyVendor.ServiceBroker
         /// Called by ASP.NET Core to register services.
         /// </summary>
         public IServiceProvider ConfigureServices(IServiceCollection services)
-            => services.AddOptions()
-                       .AddPrometheusServer(Configuration.GetSection("Metrics"))
+            => services.AddPrometheusServer(Configuration.GetSection("Metrics"))
                        .AddSecurity(Configuration.GetSection("Authentication"))
                        .AddRestApi()
                        .AddBroker(Configuration.GetSection("Broker"))
