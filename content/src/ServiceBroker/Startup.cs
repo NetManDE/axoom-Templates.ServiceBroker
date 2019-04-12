@@ -47,5 +47,11 @@ namespace MyVendor.ServiceBroker
         public void Configure(IApplicationBuilder app)
             => app.UseHealthChecks("/health")
                   .UseRestApi();
+
+        /// <summary>
+        /// Called after services have been configured but before web hosting started.
+        /// </summary>
+        public static void Init(IServiceProvider provider)
+        {}
     }
 }
