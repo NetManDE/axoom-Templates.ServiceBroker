@@ -30,16 +30,22 @@ namespace MyVendor.ServiceBroker
         /// Called by ASP.NET Core to register services.
         /// </summary>
         public IServiceProvider ConfigureServices(IServiceCollection services)
-            => services.AddPrometheusServer(Configuration.GetSection("Metrics"))
-                       .AddSecurity(Configuration.GetSection("Authentication"))
-                       .AddRestApi()
-                       .AddBroker(Configuration.GetSection("Broker"))
-                       .BuildServiceProvider();
+        {
+            services.AddPrometheusServer(Configuration.GetSection("Metrics"))
+                    .AddSecurity(Configuration.GetSection("Authentication"))
+                    .AddRestApi()
+                    .AddBroker(Configuration.GetSection("Broker"));
+
+            services.AddHealthChecks();
+
+            return services.BuildServiceProvider();
+        }
 
         /// <summary>
         /// Called by ASP.NET Core to configure services after they have been registered.
         /// </summary>
         public void Configure(IApplicationBuilder app)
-            => app.UseRestApi();
+            => app.UseHealthChecks("/health")
+                  .UseRestApi();
     }
 }
