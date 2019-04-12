@@ -11,29 +11,10 @@ namespace MyVendor.ServiceBroker.Broker
         [Fact]
         public async Task GetsCatalog()
         {
-            var catalog = new Catalog
-            {
-                Services =
-                {
-                    new Service
-                    {
-                        Id = "myservice",
-                        Name = "myservice",
-                        Plans =
-                        {
-                            new Plan
-                            {
-                                Id = "myplan",
-                                Name = "myplan"
-                            }
-                        }
-                    }
-                }
-            };
-            Use(Options.Create(new BrokerOptions {Catalog = catalog}));
+            Use(Options.Create(new BrokerOptions {Catalog = Fake.Catalog}));
 
             var result = await Subject.GetCatalogAsync();
-            result.Should().Be(catalog);
+            result.Should().BeEquivalentTo(Fake.Catalog);
         }
     }
 }

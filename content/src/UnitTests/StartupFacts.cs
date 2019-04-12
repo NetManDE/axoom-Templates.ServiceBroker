@@ -22,7 +22,7 @@ namespace MyVendor.ServiceBroker
 
         private readonly IConfiguration _configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
         {
-            ["Authentication:Realm"] = "axoom-servicebroker"
+            ["Authentication:Realm"] = "myvendor-servicebroker"
         }).Build();
 
         private readonly ServiceCollection _services = new ServiceCollection();

@@ -11,7 +11,7 @@ Logging:
     Microsoft: Warning # Reduce ASP.NET Core verbosity
 
 Authentication:
-  Realm: axoom-servicebroker
+  Realm: myvendor-servicebroker
 
 Broker:
   Catalog:
