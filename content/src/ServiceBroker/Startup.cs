@@ -3,6 +3,7 @@ using Axoom.Extensions.Prometheus.Standalone;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyVendor.ServiceBroker.Broker;
@@ -36,7 +37,10 @@ namespace MyVendor.ServiceBroker
                     .AddRestApi()
                     .AddBroker(Configuration.GetSection("Broker"));
 
-            services.AddHealthChecks();
+            services.AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")));
+
+            services.AddHealthChecks()
+                    .AddDbContextCheck<DbContext>();
 
             return services.BuildServiceProvider();
         }
@@ -52,6 +56,9 @@ namespace MyVendor.ServiceBroker
         /// Called after services have been configured but before web hosting started.
         /// </summary>
         public static void Init(IServiceProvider provider)
-        {}
+        {
+            // Replace .EnsureCreated() with .Migrate() once you have generated an EF Migration
+            provider.GetRequiredService<DbContext>().Database.EnsureCreated();
+        }
     }
 }

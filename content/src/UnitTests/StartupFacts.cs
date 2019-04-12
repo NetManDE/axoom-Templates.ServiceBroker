@@ -22,6 +22,7 @@ namespace MyVendor.ServiceBroker
 
         private readonly IConfiguration _configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
         {
+            ["Database:ConnectionString"] = ":memory:",
             ["Authentication:Realm"] = "myvendor-servicebroker"
         }).Build();
 

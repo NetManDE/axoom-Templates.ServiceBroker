@@ -13,13 +13,29 @@ Logging:
 Authentication:
   Realm: myvendor-servicebroker
 
+Database:
+  ConnectionString: Data Source=myvendor-servicebroker.db
+
 Broker:
   Catalog:
     Services:
-      - Id: myservice
-        Name: myservice
+      - Id: myservice1
+        Name: myservice1
         Description: A service.
         Plans:
-          - Id: myplan
-            Name: myplan
+          - Id: myplan1a
+            Name: myplan1a
+            Description: A plan.
+          - Id: myplan1b
+            Name: myplan1b
+            Description: A plan.
+      - Id: myservice2
+        Name: myservice2
+        Description: A service.
+        Plans:
+          - Id: myplan2a
+            Name: myplan2a
+            Description: A plan.
+          - Id: myplan2b
+            Name: myplan2b
             Description: A plan.
