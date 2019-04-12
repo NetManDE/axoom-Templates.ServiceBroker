@@ -1,7 +1,7 @@
 # Used during deployment with "helmfile charts". Maps environment variables to Helm options and values.
 releases:
   - name: myvendor-servicebroker
-    namespace: {{ requiredEnv "TENANT_ID" }}
+    namespace: '{{ requiredEnv "TENANT_ID" }}'
     chart: ./
 
     values:
