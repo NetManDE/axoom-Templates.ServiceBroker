@@ -34,13 +34,14 @@ namespace MyVendor.ServiceBroker
         {
             services.AddPrometheusServer(Configuration.GetSection("Metrics"))
                     .AddSecurity(Configuration.GetSection("Authentication"))
-                    .AddRestApi()
-                    .AddBroker(Configuration.GetSection("Broker"));
+                    .AddRestApi();
 
             services.AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")));
 
             services.AddHealthChecks()
                     .AddDbContextCheck<DbContext>();
+
+            services.AddBroker(Configuration.GetSection("Broker"));
 
             return services.BuildServiceProvider();
         }
