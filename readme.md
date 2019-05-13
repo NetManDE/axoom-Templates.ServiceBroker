@@ -3,7 +3,8 @@
 [![NuGet package](https://img.shields.io/nuget/v/Axoom.Templates.ServiceBroker.svg)](https://www.nuget.org/packages/Axoom.Templates.ServiceBroker/)
 [![Build status](https://img.shields.io/appveyor/ci/AXOOM/templates-servicebroker.svg)](https://ci.appveyor.com/project/AXOOM/templates-servicebroker)
 
-This template helps you implement a Service Broker according to the [Open Service Broker API](https://www.openservicebrokerapi.org/).
+This template helps you implement a Service Broker according to the [Open Service Broker API](https://www.openservicebrokerapi.org/).  
+It uses the [OpenServiceBroker.Server library](https://github.com/AXOOM/OpenServiceBroker#server-library).
 
 # Using the template
 
