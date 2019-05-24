@@ -1,14 +1,11 @@
+# Config for "generic-service" chart
 app:
   name: myvendor-servicebroker
 
   image:
-    registry: docker.axoom.cloud # replaced with docker-ci.axoom.cloud for pre-release builds by build server
-    repository: services/myvendor-servicebroker
-    tag: latest # replaced with specific version number by build server
-
-  ingress:
-    enabled: true
-    class: cluster
+    registry: eu.gcr.io
+    authenticated: false
+    repository: axoom-image/myteam/myvendor-servicebroker
 
   # Used for SQLite
   persistence:
@@ -26,8 +23,8 @@ app:
 
   alerting:
     enabled: true
-    #labels:
-    #  team: myteam
+    labels:
+      team: myteam
 
   livenessProbe:
     initialDelaySeconds: 10 # Allow for long startup
@@ -40,3 +37,5 @@ app:
     httpGet:
       port: ingress
       path: /health # Check the service and all its dependencies are ready
+
+serviceCatalogRegister: true

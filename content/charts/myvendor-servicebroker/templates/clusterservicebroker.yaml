@@ -1,3 +1,4 @@
+{{- if .Values.serviceCatalogRegister }}
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ClusterServiceBroker
 metadata:
@@ -21,3 +22,4 @@ type: Opaque
 data:
   username: {{ required "Missing app.env.Authentication__Username" .Values.app.env.Authentication__Username | b64enc }}
   password: {{ required "Missing app.env.Authentication__Password" .Values.app.env.Authentication__Password | b64enc }}
+{{- end }}

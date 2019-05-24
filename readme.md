@@ -14,12 +14,15 @@ Download and install the [.NET Core SDK](https://www.microsoft.com/net/download)
 
 To use the template to create a new project:
 
-    dotnet new axoom-servicebroker --name "MyVendor.ServiceBroker" --serviceName myvendor-servicebroker --friendlyName "My Service Broker"--description "my description"
+    dotnet new axoom-servicebroker --name "MyVendor.ServiceBroker" --serviceName myvendor-servicebroker --team "myteam" --friendlyName "My Service Broker"--description "my description"
     cd MyVendor.ServiceBroker
+    git init
+    git update-index --add --chmod=+x build.sh src/build.sh src/test.sh
 
 In the commands above replace
 - `MyVendor.ServiceBroker` with the .NET namespace you wish to use,
 - `myvendor-servicebroker` with the name of your company and service broker using only lowercase letters and hyphens,
+- `myteam` with the name of your team within the company using only lowercase letters and hyphens,
 - `My Service Broker` with the full name of your service broker and
 - `my description` with a brief (single sentence) description of the service broker.
 

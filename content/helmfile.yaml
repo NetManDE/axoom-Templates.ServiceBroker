@@ -1,0 +1,31 @@
+# Registers repos for use in requirements.yaml
+repositories:
+  - name: axoom-github
+    url: https://axoom.github.io/charts/
+
+# Maps environment variables to Helm options and values
+releases:
+  - name: myvendor-servicebroker
+    namespace: myteam
+    chart: ./charts/myvendor-servicebroker
+
+    values:
+      - app:
+          image:
+            tag: '{{ requiredEnv "GitVersion_NuGetVersion" }}'
+
+          env:
+            ASPNETCORE_ENVIRONMENT: '{{ env "ASPNETCORE_ENVIRONMENT" | default "Production" }}'
+            Authentication__Username: {{ env "USERNAME" | default "user" | quote }}
+            Authentication__Password: {{ env "PASSWORD" | default (randAlphaNum 16) | quote }}
+
+          ingress:
+            enabled: true
+            {{- if env "PUBLIC_DOMAIN" }}
+            class: traefik-public
+            domain: {{ env "PUBLIC_DOMAIN" }}
+            {{- else }}
+            class: cluster
+            {{- end }}
+
+        serviceCatalogRegister: {{ env "SERVICE_CATALOG_REGISTER" | default "true" }}
