@@ -1,9 +1,13 @@
+helmDefaults:
+  force: true # Allow deploying over failed releases
+  wait: true # Wait for all Pods to become ready
+
 # Registers repos for use in requirements.yaml
 repositories:
   - name: axoom-github
     url: https://axoom.github.io/charts/
 
-# Maps environment variables to Helm options and values
+# Installs charts
 releases:
   - name: myvendor-servicebroker
     namespace: myteam

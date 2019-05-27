@@ -10,15 +10,13 @@ EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C00A67A5-E0EE-4DD1-9A99-A7C00B9A6D50}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helm", "Helm", "{DE2C55D8-8D71-481E-B8DD-E5714FB7E223}"
-ProjectSection(SolutionItems) = preProject
-	..\charts\myvendor-servicebroker\Chart.yaml = ..\charts\myvendor-servicebroker\Chart.yaml
-	..\charts\myvendor-servicebroker\helmfile.repos.yaml = ..\charts\myvendor-servicebroker\helmfile.repos.yaml
-	..\charts\myvendor-servicebroker\helmfile.yaml = ..\charts\myvendor-servicebroker\helmfile.yaml
-	..\charts\myvendor-servicebroker\README.md = ..\charts\myvendor-servicebroker\README.md
-	..\charts\myvendor-servicebroker\requirements.yaml = ..\charts\myvendor-servicebroker\requirements.yaml
-	..\charts\myvendor-servicebroker\values.yaml = ..\charts\myvendor-servicebroker\values.yaml
-	..\charts\myvendor-servicebroker\templates\clusterservicebroker.yaml = ..\charts\myvendor-servicebroker\templates\clusterservicebroker.yaml
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		..\charts\myvendor-servicebroker\Chart.yaml = ..\charts\myvendor-servicebroker\Chart.yaml
+		..\charts\myvendor-servicebroker\requirements.yaml = ..\charts\myvendor-servicebroker\requirements.yaml
+		..\charts\myvendor-servicebroker\values.yaml = ..\charts\myvendor-servicebroker\values.yaml
+		..\charts\myvendor-servicebroker\templates\clusterservicebroker.yaml = ..\charts\myvendor-servicebroker\templates\clusterservicebroker.yaml
+		..\helmfile.yaml = ..\helmfile.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -22,8 +22,7 @@ gitversion:
 
 dotnet:
   stage: build
-  image:
-    name: mcr.microsoft.com/dotnet/core/sdk:2.2
+  image: mcr.microsoft.com/dotnet/core/sdk:2.2
   script:
     - ./build.sh $GitVersion_NuGetVersion
   artifacts:
@@ -42,8 +41,7 @@ docker:
 
 .deploy: &deploy
   when: manual
-  image:
-    name: axoom/gcloud-helmfile
+  image: axoom/gcloud-helmfile
   environment:
     name: $CLUSTER_NAME
   script:
@@ -52,6 +50,7 @@ docker:
 deploy:dev: &deploy_dev
   <<: *deploy
   stage: deploy:dev
+  except: [master]
   variables:
     # gcloud
     GCP_PROJECT: axoom-platform-devstages
@@ -61,6 +60,7 @@ deploy:dev: &deploy_dev
 
 deploy:dev:auto:
   <<: *deploy_dev
+  except: []
   only: [master]
   when: on_success
 
@@ -78,8 +78,8 @@ deploy:live:
   <<: *deploy
   stage: deploy:live
   variables:
-   # gcloud
-     GCP_PROJECT: axoom-platform-production
+    # gcloud
+    GCP_PROJECT: axoom-platform-production
     CLUSTER_NAME: live
     # helmfile
     ASPNETCORE_ENVIRONMENT: Production
