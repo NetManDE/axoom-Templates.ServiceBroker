@@ -28,6 +28,8 @@ dotnet:
   artifacts:
     paths:
       - src/ServiceBroker/obj/Docker/publish
+    reports:
+      junit: artifacts/test-results.xml
 
 docker:
   stage: publish
