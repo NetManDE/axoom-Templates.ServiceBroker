@@ -17,7 +17,7 @@
 
   <PropertyGroup>
     <Title>My Service Broker</Title>
-    <Description>Provisions services requested via the Open Service Broker API.</Description>
+    <Description>my description</Description>
   </PropertyGroup>
 
   <ItemGroup>
