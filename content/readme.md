@@ -12,8 +12,8 @@ Configuration overrides for local development are specified in:
 
 To build and then run locally with Docker Compose:
 ```powershell
-cd src
 ./build.ps1
+cd src
 docker-compose up --build
 ```
 You can then interact with the API at: http://localhost:12345/swagger/

@@ -17,7 +17,7 @@ To use the template to create a new project:
     dotnet new axoom-servicebroker --name "MyVendor.ServiceBroker" --serviceName myvendor-servicebroker --team "myteam" --friendlyName "My Service Broker"--description "my description"
     cd MyVendor.ServiceBroker
     git init
-    git update-index --add --chmod=+x build.sh src/build.sh src/test.sh
+    git update-index --add --chmod=+x build.sh
 
 In the commands above replace
 - `MyVendor.ServiceBroker` with the .NET namespace you wish to use,
