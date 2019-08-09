@@ -45,7 +45,7 @@ namespace MyVendor.ServiceBroker
             => app.UseHealthChecks("/health")
                   .UseRestApi();
 
-        // Run startup tasks
+        // Tasks that need to run before serving HTTP requests
         public static void Init(IServiceProvider provider)
         {
             // TODO: Replace .EnsureCreated() with .Migrate() once you start using EF Migrations
