@@ -11,54 +11,44 @@ using MyVendor.ServiceBroker.Infrastructure;
 
 namespace MyVendor.ServiceBroker
 {
-    /// <summary>
-    /// Configures dependency injection.
-    /// </summary>
     [UsedImplicitly]
     public class Startup : IStartup
     {
-        public IConfiguration Configuration { get; }
+        private readonly IConfiguration _configuration;
 
-        /// <summary>
-        /// Called by ASP.NET Core to set up an environment.
-        /// </summary>
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        /// <summary>
-        /// Called by ASP.NET Core to register services.
-        /// </summary>
+        // Register services for DI
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddPrometheusServer(Configuration.GetSection("Metrics"))
-                    .AddSecurity(Configuration.GetSection("Authentication"))
+            services.AddPrometheusServer(_configuration.GetSection("Metrics"))
+                    .AddSecurity(_configuration.GetSection("Authentication"))
                     .AddRestApi();
 
-            services.AddDbContext<DbContext>(options => options.UseSqlite(Configuration.GetSection("Database").GetValue<string>("ConnectionString")));
+            services.AddDbContext<DbContext>(options => options
+                // TODO: Replace SQLite with external database for scalability
+               .UseSqlite(_configuration.GetConnectionString("Database")));
 
             services.AddHealthChecks()
                     .AddDbContextCheck<DbContext>();
 
-            services.AddBroker(Configuration.GetSection("Broker"));
+            services.AddBroker(_configuration.GetSection("Broker"));
 
             return services.BuildServiceProvider();
         }
 
-        /// <summary>
-        /// Called by ASP.NET Core to configure services after they have been registered.
-        /// </summary>
+        // Configure HTTP request pipeline
         public void Configure(IApplicationBuilder app)
             => app.UseHealthChecks("/health")
                   .UseRestApi();
 
-        /// <summary>
-        /// Called after services have been configured but before web hosting started.
-        /// </summary>
+        // Run startup tasks
         public static void Init(IServiceProvider provider)
         {
-            // Replace .EnsureCreated() with .Migrate() once you have generated an EF Migration
+            // TODO: Replace .EnsureCreated() with .Migrate() once you start using EF Migrations
             provider.GetRequiredService<DbContext>().Database.EnsureCreated();
         }
     }
