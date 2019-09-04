@@ -31,5 +31,3 @@ releases:
             {{- else }}
             class: cluster
             {{- end }}
-
-        serviceCatalogRegister: {{ env "SERVICE_CATALOG_REGISTER" | default "true" }}
