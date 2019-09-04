@@ -9,7 +9,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "Logging__Format": "Plain",
         "Authentication__Username": "test",
-        "Authentication__Password": "test"
+        "Authentication__Password": "test",
+        "ConnectionStrings__Database": "Data Source=myvendor-servicebroker.db"
       }
     }
   }

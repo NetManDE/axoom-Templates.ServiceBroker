@@ -39,6 +39,8 @@ The deployment is configured using environment variables (see [.gitlab-ci.yml](.
 | `USERNAME`                | `user`           | The username for access to the broker.                                                     |
 | `PASSWORD`                | *auto-generated* | The password for access to the broker.                                                     |
 | `PUBLIC_DOMAIN`           |                  | A public domain to expose the broker under. Leave empty for cluster-only access.           |
+| `DATABASE_NAME`           | *required*       | The name of the PostgreSQL database and user to use for data storage.                      |
+| `DATABASE_PASSWORD`       | *required*       | The password for the PostgreSQL user.                                                      |
 
 Once the Broker is deployed in the cluster you should be able to see the services it provides by running:
 ```

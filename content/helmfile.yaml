@@ -22,6 +22,7 @@ releases:
             ASPNETCORE_ENVIRONMENT: '{{ env "ASPNETCORE_ENVIRONMENT" | default "Production" }}'
             Authentication__Username: {{ env "USERNAME" | default "user" | quote }}
             Authentication__Password: {{ env "PASSWORD" | default (randAlphaNum 16) | quote }}
+            ConnectionStrings__Database: 'Host=cloud-sql.cloud-sql.svc.cluster.local;User ID={{ requiredEnv "DATABASE_NAME" }};Password={{ requiredEnv "DATABASE_PASSWORD" }};Database={{ requiredEnv "DATABASE_NAME" }};Integrated Security=true;Pooling=true'
 
           ingress:
             enabled: true

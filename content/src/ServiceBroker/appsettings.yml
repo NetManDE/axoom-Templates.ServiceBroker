@@ -13,9 +13,6 @@ Logging:
 Authentication:
   Realm: myvendor-servicebroker
 
-ConnectionStrings:
-  Database: Data Source=myvendor-servicebroker.db
-
 Broker:
   Catalog:
     Services:
