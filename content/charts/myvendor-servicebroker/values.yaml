@@ -4,7 +4,6 @@ app:
 
   image:
     registry: eu.gcr.io
-    authenticated: false
     repository: axoom-image/myteam/myvendor-servicebroker
 
   resources:
