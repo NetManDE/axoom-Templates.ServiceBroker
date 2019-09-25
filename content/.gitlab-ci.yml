@@ -45,6 +45,9 @@ docker:
   image: axoom/gcloud-helmfile
   environment:
     name: $CLUSTER_NAME
+  variables:
+    # Automatically creates database in Google Cloud SQL
+    DATABASE_NAME: 
   script:
     - /entrypoint.sh
 
@@ -55,7 +58,6 @@ deploy:dev:
     # gcloud
     GCP_PROJECT: axoom-platform-devstages
     CLUSTER_NAME: dev
-    DATABASE_NAME: myvendor-servicebroker
     # helmfile
     ASPNETCORE_ENVIRONMENT: Development
 
@@ -71,7 +73,6 @@ deploy:test:
     # gcloud
     GCP_PROJECT: axoom-platform-devstages
     CLUSTER_NAME: test
-    DATABASE_NAME: myvendor-servicebroker
     # helmfile
     ASPNETCORE_ENVIRONMENT: Production
 
@@ -81,6 +82,5 @@ deploy:live:
     # gcloud
     GCP_PROJECT: axoom-platform-production
     CLUSTER_NAME: live
-    DATABASE_NAME: myvendor-servicebroker
     # helmfile
     ASPNETCORE_ENVIRONMENT: Production
