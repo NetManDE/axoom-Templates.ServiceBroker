@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
@@ -16,41 +17,48 @@ namespace MyVendor.ServiceBroker.Infrastructure
     {
         public static IServiceCollection AddRestApi(this IServiceCollection services)
         {
-            services.AddMvc(options => options.Filters.Add(new AuthorizeFilter())) // Require authorization by default
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                    .AddJsonOptions(options =>
+            services.AddMvcCore(options =>
+                     {
+                         options.EnableEndpointRouting = false;
+                     })
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                    .AddApiExplorer()
+                    .AddFormatterMappings()
+                    .AddDataAnnotations()
+                    .AddNewtonsoftJson(options =>
                      {
                          options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                          options.SerializerSettings.Converters.Add(new StringEnumConverter {NamingStrategy = new CamelCaseNamingStrategy()});
                      });
 
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1",
-                    new Info
-                    {
-                        Title = "My Service Broker",
-                        Version = "v1"
-                    });
-                options.IncludeXmlComments(Path.Combine(ApplicationEnvironment.ApplicationBasePath, "MyVendor.ServiceBroker.xml"));
-                options.DescribeAllEnumsAsStrings();
-            });
+//            services.AddSwaggerGen(options =>
+//            {
+//                options.SwaggerDoc("v1",
+//                    new Info
+//                    {
+//                        Title = "My Service Broker",
+//                        Version = "v1"
+//                    });
+//                options.IncludeXmlComments(Path.Combine(ApplicationEnvironment.ApplicationBasePath, "MyVendor.ServiceBroker.xml"));
+//                options.DescribeAllEnumsAsStrings();
+//            });
 
             return services;
         }
 
         public static IApplicationBuilder UseRestApi(this IApplicationBuilder app)
         {
-            app.UseForwardedHeaders(TrustExternalProxy());
+            app.UseForwardedHeaders(TrustExternalProxy())
+               .UseStatusCodePages();
 
-            if (app.ApplicationServices.GetRequiredService<IHostingEnvironment>().IsDevelopment())
+            if (app.ApplicationServices.GetRequiredService<IWebHostEnvironment>().IsDevelopment())
             {
                 app.UseDeveloperExceptionPage()
                    .UseExceptionDemystifier();
             }
 
-            app.UseSwagger()
-               .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service Broker API v1"));
+//            app.UseSwagger()
+//               .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Service Broker API v1"));
 
             return app.UseMvc();
         }

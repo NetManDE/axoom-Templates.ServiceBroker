@@ -41,10 +41,10 @@ namespace MyVendor.ServiceBroker.Infrastructure
                 options.DefaultPolicy = new AuthorizationPolicyBuilder(BasicAuthenticationDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build();
             });
 
-            services.ConfigureSwaggerGen(options =>
-            {
-                options.AddSecurityDefinition("basic", new BasicAuthScheme());
-            });
+//            services.ConfigureSwaggerGen(options =>
+//            {
+//                options.AddSecurityDefinition("basic", new BasicAuthScheme());
+//            });
 
             return services;
         }
